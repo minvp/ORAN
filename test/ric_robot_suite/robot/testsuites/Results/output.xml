@@ -1,0 +1,1121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot rpa="false" generated="20220316 23:15:46.729" schemaversion="2" generator="Robot 4.1.3 (Python 2.7.17 on linux2)">
+<suite source="/root/test/ric_robot_suite/robot/testsuites/ete.robot" id="s1" name="Ete">
+<test id="s1-t1" name="Test XApp Manager Health">
+<kw name="Run AppMgr Health Check" library="appmgr_interface">
+<doc>Runs AppMgr Health check</doc>
+<kw name="Run Keyword" library="BuiltIn">
+<arg>Get Deployed XApps</arg>
+<doc>Executes the given keyword with the given arguments.</doc>
+<kw name="Get Deployed XApps" library="appmgr_interface">
+<doc>Obtain the list of deployed XApps from the Appmgr</doc>
+<kw name="Run AppMgr GET Request" library="appmgr_interface">
+<var>${resp}</var>
+<doc>Make an HTTP GET request against the XApp manager</doc>
+<kw name="Create Session">
+<var>${session} =</var>
+<arg>roboAppmgrGet</arg>
+<arg>${APPMGR_ENDPOINT}</arg>
+<msg timestamp="20220316 23:15:46.844" level="FAIL">No keyword with name 'Create Session' found.</msg>
+<status status="FAIL" endtime="20220316 23:15:46.844" starttime="20220316 23:15:46.844"/>
+</kw>
+<kw name="Create Dictionary" library="BuiltIn">
+<var>${headers}</var>
+<arg>Accept=application/json</arg>
+<arg>Content-Type=application/json</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="NOT RUN" endtime="20220316 23:15:46.846" starttime="20220316 23:15:46.845"/>
+</kw>
+<kw name="Get Request">
+<var>${resp} =</var>
+<arg>roboAppmgrGet</arg>
+<arg>${APPMGR_BASE_PATH}${path}</arg>
+<arg>headers=${headers}</arg>
+<status status="NOT RUN" endtime="20220316 23:15:46.850" starttime="20220316 23:15:46.850"/>
+</kw>
+<status status="FAIL" endtime="20220316 23:15:46.851" starttime="20220316 23:15:46.838"/>
+</kw>
+<status status="FAIL" endtime="20220316 23:15:46.852" starttime="20220316 23:15:46.838"/>
+</kw>
+<status status="FAIL" endtime="20220316 23:15:46.853" starttime="20220316 23:15:46.838"/>
+</kw>
+<status status="FAIL" endtime="20220316 23:15:46.854" starttime="20220316 23:15:46.837"/>
+</kw>
+<tag>etetests</tag>
+<tag>xapptests</tag>
+<status status="FAIL" endtime="20220316 23:15:46.854" starttime="20220316 23:15:46.837">No keyword with name 'Create Session' found.</status>
+</test>
+<test id="s1-t2" name="Deploy An XApp">
+<kw name="Deploy XApp" library="appmgr_interface">
+<arg>${TEST_XAPPNAME}</arg>
+<doc>Create Xapp</doc>
+<kw name="Create Dictionary" library="BuiltIn">
+<var>&amp;{dict}</var>
+<arg>name=${xapp_name}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<msg timestamp="20220316 23:15:46.856" level="INFO">&amp;{dict} = { name=xapp-std }</msg>
+<status status="PASS" endtime="20220316 23:15:46.856" starttime="20220316 23:15:46.855"/>
+</kw>
+<kw name="Evaluate" library="BuiltIn">
+<var>${data}</var>
+<arg>json.dumps(&amp;{dict})</arg>
+<arg>json</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<msg timestamp="20220316 23:15:46.862" level="INFO">${data} = {"name": "xapp-std"}</msg>
+<status status="PASS" endtime="20220316 23:15:46.863" starttime="20220316 23:15:46.856"/>
+</kw>
+<kw name="Run AppMgr POST Request" library="appmgr_interface">
+<var>${resp}</var>
+<arg>${EMPTY}</arg>
+<arg>${data}</arg>
+<doc>Make an HTTP POST request against the XApp manager</doc>
+<kw name="Create Session">
+<var>${session} =</var>
+<arg>roboAppmgrPost</arg>
+<arg>${APPMGR_ENDPOINT}</arg>
+<msg timestamp="20220316 23:15:46.869" level="FAIL">No keyword with name 'Create Session' found.</msg>
+<status status="FAIL" endtime="20220316 23:15:46.869" starttime="20220316 23:15:46.869"/>
+</kw>
+<kw name="Create Dictionary" library="BuiltIn">
+<var>${headers}</var>
+<arg>Accept=application/json</arg>
+<arg>Content-Type=application/json</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="NOT RUN" endtime="20220316 23:15:46.870" starttime="20220316 23:15:46.870"/>
+</kw>
+<kw name="Post Request">
+<var>${resp} =</var>
+<arg>roboAppmgrPost</arg>
+<arg>${APPMGR_BASE_PATH}${path}</arg>
+<arg>headers=${headers}</arg>
+<arg>data=${body}</arg>
+<status status="NOT RUN" endtime="20220316 23:15:46.875" starttime="20220316 23:15:46.875"/>
+</kw>
+<status status="FAIL" endtime="20220316 23:15:46.876" starttime="20220316 23:15:46.863"/>
+</kw>
+<kw name="Should Be True" library="BuiltIn">
+<arg>${resp}</arg>
+<doc>Fails if the given condition is not true.</doc>
+<status status="NOT RUN" endtime="20220316 23:15:46.876" starttime="20220316 23:15:46.876"/>
+</kw>
+<status status="FAIL" endtime="20220316 23:15:46.877" starttime="20220316 23:15:46.855"/>
+</kw>
+<tag>etetests</tag>
+<tag>xapptests</tag>
+<status status="FAIL" endtime="20220316 23:15:46.877" starttime="20220316 23:15:46.854">No keyword with name 'Create Session' found.</status>
+</test>
+<test id="s1-t3" name="Retrieve The Deployed XApp">
+<kw name="Get XApp By Name" library="appmgr_interface">
+<arg>${TEST_XAPPNAME}</arg>
+<doc>Get installed XApp from Appmgr given name</doc>
+<kw name="Run AppMgr GET Request" library="appmgr_interface">
+<var>${resp}</var>
+<arg>/${xapp_name}</arg>
+<doc>Make an HTTP GET request against the XApp manager</doc>
+<kw name="Create Session">
+<var>${session} =</var>
+<arg>roboAppmgrGet</arg>
+<arg>${APPMGR_ENDPOINT}</arg>
+<msg timestamp="20220316 23:15:46.885" level="FAIL">No keyword with name 'Create Session' found.</msg>
+<status status="FAIL" endtime="20220316 23:15:46.885" starttime="20220316 23:15:46.885"/>
+</kw>
+<kw name="Create Dictionary" library="BuiltIn">
+<var>${headers}</var>
+<arg>Accept=application/json</arg>
+<arg>Content-Type=application/json</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="NOT RUN" endtime="20220316 23:15:46.886" starttime="20220316 23:15:46.885"/>
+</kw>
+<kw name="Get Request">
+<var>${resp} =</var>
+<arg>roboAppmgrGet</arg>
+<arg>${APPMGR_BASE_PATH}${path}</arg>
+<arg>headers=${headers}</arg>
+<status status="NOT RUN" endtime="20220316 23:15:46.890" starttime="20220316 23:15:46.890"/>
+</kw>
+<status status="FAIL" endtime="20220316 23:15:46.892" starttime="20220316 23:15:46.879"/>
+</kw>
+<kw name="Should Be True" library="BuiltIn">
+<arg>${resp}</arg>
+<doc>Fails if the given condition is not true.</doc>
+<status status="NOT RUN" endtime="20220316 23:15:46.892" starttime="20220316 23:15:46.892"/>
+</kw>
+<status status="FAIL" endtime="20220316 23:15:46.893" starttime="20220316 23:15:46.879"/>
+</kw>
+<tag>etetests</tag>
+<tag>xapptests</tag>
+<status status="FAIL" endtime="20220316 23:15:46.894" starttime="20220316 23:15:46.878">No keyword with name 'Create Session' found.</status>
+</test>
+<test id="s1-t4" name="Attempt To Deploy A Duplicate XApp">
+<kw name="Deploy Duplicate XApp And Expect Error" library="negative_appmgr_tests">
+<doc>Ensure AppMgr produces an appropriate error when an already-running XApp is deployed</doc>
+<kw name="Get Deployed XApps" library="appmgr_interface">
+<var>@{d}</var>
+<doc>Obtain the list of deployed XApps from the Appmgr</doc>
+<kw name="Run AppMgr GET Request" library="appmgr_interface">
+<var>${resp}</var>
+<doc>Make an HTTP GET request against the XApp manager</doc>
+<kw name="Create Session">
+<var>${session} =</var>
+<arg>roboAppmgrGet</arg>
+<arg>${APPMGR_ENDPOINT}</arg>
+<msg timestamp="20220316 23:15:46.901" level="FAIL">No keyword with name 'Create Session' found.</msg>
+<status status="FAIL" endtime="20220316 23:15:46.901" starttime="20220316 23:15:46.901"/>
+</kw>
+<kw name="Create Dictionary" library="BuiltIn">
+<var>${headers}</var>
+<arg>Accept=application/json</arg>
+<arg>Content-Type=application/json</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="NOT RUN" endtime="20220316 23:15:46.902" starttime="20220316 23:15:46.902"/>
+</kw>
+<kw name="Get Request">
+<var>${resp} =</var>
+<arg>roboAppmgrGet</arg>
+<arg>${APPMGR_BASE_PATH}${path}</arg>
+<arg>headers=${headers}</arg>
+<status status="NOT RUN" endtime="20220316 23:15:46.906" starttime="20220316 23:15:46.906"/>
+</kw>
+<status status="FAIL" endtime="20220316 23:15:46.907" starttime="20220316 23:15:46.895"/>
+</kw>
+<status status="FAIL" endtime="20220316 23:15:46.909" starttime="20220316 23:15:46.895"/>
+</kw>
+<kw name="Should Not Be Empty" library="BuiltIn">
+<arg>${d}</arg>
+<arg>No XApps currently deployed</arg>
+<doc>Verifies that the given item is not empty.</doc>
+<status status="NOT RUN" endtime="20220316 23:15:46.910" starttime="20220316 23:15:46.909"/>
+</kw>
+<kw name="Pluck" library="ric_utils">
+<var>@{names}</var>
+<arg>name</arg>
+<arg>${d}</arg>
+<doc>Get the values of a specific key from a list of dictionaries</doc>
+<status status="NOT RUN" endtime="20220316 23:15:46.910" starttime="20220316 23:15:46.910"/>
+</kw>
+<kw name="Evaluate" library="BuiltIn">
+<var>${xapp}</var>
+<arg>random.choice(${names})</arg>
+<arg>random</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<status status="NOT RUN" endtime="20220316 23:15:46.910" starttime="20220316 23:15:46.910"/>
+</kw>
+<kw name="Run Keyword And Ignore Error" library="BuiltIn">
+<var>${status}</var>
+<var>${u}</var>
+<arg>Deploy XApp</arg>
+<arg>${xapp}</arg>
+<doc>Runs the given keyword with the given arguments and ignores possible error.</doc>
+<status status="NOT RUN" endtime="20220316 23:15:46.910" starttime="20220316 23:15:46.910"/>
+</kw>
+<kw name="Should Be Equal As Strings" library="BuiltIn">
+<arg>${status}</arg>
+<arg>FAIL</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<status status="NOT RUN" endtime="20220316 23:15:46.910" starttime="20220316 23:15:46.910"/>
+</kw>
+<status status="FAIL" endtime="20220316 23:15:46.911" starttime="20220316 23:15:46.895"/>
+</kw>
+<tag>etetests</tag>
+<tag>xapptests</tag>
+<status status="FAIL" endtime="20220316 23:15:46.912" starttime="20220316 23:15:46.894">No keyword with name 'Create Session' found.</status>
+</test>
+<test id="s1-t5" name="Undeploy The Deployed XApp">
+<kw name="Undeploy XApp" library="appmgr_interface">
+<arg>${TEST_XAPPNAME}</arg>
+<doc>Remove a deployed XApp</doc>
+<kw name="Run AppMgr DELETE Request" library="appmgr_interface">
+<var>${resp}</var>
+<arg>/${xapp_name}</arg>
+<doc>Make an HTTP DELETE request against the XApp manager</doc>
+<kw name="Create Session">
+<var>${session} =</var>
+<arg>roboAppmgrDelete</arg>
+<arg>${APPMGR_ENDPOINT}</arg>
+<msg timestamp="20220316 23:15:46.919" level="FAIL">No keyword with name 'Create Session' found.</msg>
+<status status="FAIL" endtime="20220316 23:15:46.920" starttime="20220316 23:15:46.919"/>
+</kw>
+<kw name="Create Dictionary" library="BuiltIn">
+<var>${headers}</var>
+<arg>Accept=application/json</arg>
+<arg>Content-Type=application/json</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="NOT RUN" endtime="20220316 23:15:46.920" starttime="20220316 23:15:46.920"/>
+</kw>
+<kw name="Delete Request">
+<var>${resp} =</var>
+<arg>roboAppmgrDelete</arg>
+<arg>${APPMGR_BASE_PATH}${path}</arg>
+<arg>headers=${headers}</arg>
+<status status="NOT RUN" endtime="20220316 23:15:46.926" starttime="20220316 23:15:46.926"/>
+</kw>
+<status status="FAIL" endtime="20220316 23:15:46.927" starttime="20220316 23:15:46.914"/>
+</kw>
+<kw name="Should Be True" library="BuiltIn">
+<arg>${resp}</arg>
+<doc>Fails if the given condition is not true.</doc>
+<status status="NOT RUN" endtime="20220316 23:15:46.928" starttime="20220316 23:15:46.928"/>
+</kw>
+<status status="FAIL" endtime="20220316 23:15:46.929" starttime="20220316 23:15:46.914"/>
+</kw>
+<tag>etetests</tag>
+<tag>xapptests</tag>
+<status status="FAIL" endtime="20220316 23:15:46.929" starttime="20220316 23:15:46.912">No keyword with name 'Create Session' found.</status>
+</test>
+<test id="s1-t6" name="Attempt To Undeploy An Already Undeployed XApp">
+<kw name="Undeploy Nondeployed XApp And Expect Error" library="negative_appmgr_tests">
+<doc>Ensure AppMgr produces an appropriate error when an existing but non-running XApp is deleted</doc>
+<kw name="Get Deployed XApps" library="appmgr_interface">
+<var>@{d}</var>
+<doc>Obtain the list of deployed XApps from the Appmgr</doc>
+<kw name="Run AppMgr GET Request" library="appmgr_interface">
+<var>${resp}</var>
+<doc>Make an HTTP GET request against the XApp manager</doc>
+<kw name="Create Session">
+<var>${session} =</var>
+<arg>roboAppmgrGet</arg>
+<arg>${APPMGR_ENDPOINT}</arg>
+<msg timestamp="20220316 23:15:46.936" level="FAIL">No keyword with name 'Create Session' found.</msg>
+<status status="FAIL" endtime="20220316 23:15:46.936" starttime="20220316 23:15:46.936"/>
+</kw>
+<kw name="Create Dictionary" library="BuiltIn">
+<var>${headers}</var>
+<arg>Accept=application/json</arg>
+<arg>Content-Type=application/json</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="NOT RUN" endtime="20220316 23:15:46.937" starttime="20220316 23:15:46.937"/>
+</kw>
+<kw name="Get Request">
+<var>${resp} =</var>
+<arg>roboAppmgrGet</arg>
+<arg>${APPMGR_BASE_PATH}${path}</arg>
+<arg>headers=${headers}</arg>
+<status status="NOT RUN" endtime="20220316 23:15:46.942" starttime="20220316 23:15:46.942"/>
+</kw>
+<status status="FAIL" endtime="20220316 23:15:46.943" starttime="20220316 23:15:46.931"/>
+</kw>
+<status status="FAIL" endtime="20220316 23:15:46.944" starttime="20220316 23:15:46.931"/>
+</kw>
+<kw name="Get Deployable XApps" library="appmgr_interface">
+<var>@{a}</var>
+<doc>Obtain the list of deployed XApps from the Appmgr</doc>
+<status status="NOT RUN" endtime="20220316 23:15:46.945" starttime="20220316 23:15:46.945"/>
+</kw>
+<kw name="Should Not Be Empty" library="BuiltIn">
+<arg>${a}</arg>
+<arg>No XApps available to deploy</arg>
+<doc>Verifies that the given item is not empty.</doc>
+<status status="NOT RUN" endtime="20220316 23:15:46.945" starttime="20220316 23:15:46.945"/>
+</kw>
+<kw name="Pluck" library="ric_utils">
+<var>@{dNames}</var>
+<arg>name</arg>
+<arg>${d}</arg>
+<doc>Get the values of a specific key from a list of dictionaries</doc>
+<status status="NOT RUN" endtime="20220316 23:15:46.945" starttime="20220316 23:15:46.945"/>
+</kw>
+<kw name="Subtract From List" library="ric_utils">
+<var>@{a}</var>
+<arg>${a}</arg>
+<arg>${dNames}</arg>
+<doc>Remove the elements of the second argument from the first</doc>
+<status status="NOT RUN" endtime="20220316 23:15:46.946" starttime="20220316 23:15:46.946"/>
+</kw>
+<kw name="Should Not Be Empty" library="BuiltIn">
+<arg>${a}</arg>
+<arg>No undeployed XApps</arg>
+<doc>Verifies that the given item is not empty.</doc>
+<status status="NOT RUN" endtime="20220316 23:15:46.946" starttime="20220316 23:15:46.946"/>
+</kw>
+<kw name="Evaluate" library="BuiltIn">
+<var>${xapp}</var>
+<arg>random.choice(${a})</arg>
+<arg>random</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<status status="NOT RUN" endtime="20220316 23:15:46.946" starttime="20220316 23:15:46.946"/>
+</kw>
+<kw name="Run Keyword And Ignore Error" library="BuiltIn">
+<var>${status}</var>
+<var>${u}</var>
+<arg>Undeploy XApp</arg>
+<arg>${xapp}</arg>
+<doc>Runs the given keyword with the given arguments and ignores possible error.</doc>
+<status status="NOT RUN" endtime="20220316 23:15:46.946" starttime="20220316 23:15:46.946"/>
+</kw>
+<kw name="Should Be Equal As Strings" library="BuiltIn">
+<arg>${status}</arg>
+<arg>FAIL</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<status status="NOT RUN" endtime="20220316 23:15:46.947" starttime="20220316 23:15:46.946"/>
+</kw>
+<status status="FAIL" endtime="20220316 23:15:46.947" starttime="20220316 23:15:46.930"/>
+</kw>
+<tag>etetests</tag>
+<tag>xapptests</tag>
+<status status="FAIL" endtime="20220316 23:15:46.948" starttime="20220316 23:15:46.930">No keyword with name 'Create Session' found.</status>
+</test>
+<test id="s1-t7" name="Attempt To Request A Nonexistent XApp">
+<kw name="Request Nonexistent XApp And Expect Error" library="negative_appmgr_tests">
+<doc>Ensure AppMgr produces an appropriate error when retrieving a nonexistent XApp</doc>
+<kw name="Generate UUID">
+<var>${xapp} =</var>
+<msg timestamp="20220316 23:15:46.956" level="FAIL">No keyword with name 'Generate UUID' found.</msg>
+<status status="FAIL" endtime="20220316 23:15:46.956" starttime="20220316 23:15:46.955"/>
+</kw>
+<kw name="Run Keyword And Ignore Error" library="BuiltIn">
+<var>${status}</var>
+<var>${u}</var>
+<arg>Get XApp By Name {$xapp}</arg>
+<doc>Runs the given keyword with the given arguments and ignores possible error.</doc>
+<status status="NOT RUN" endtime="20220316 23:15:46.957" starttime="20220316 23:15:46.957"/>
+</kw>
+<kw name="Should Be Equal As Strings" library="BuiltIn">
+<arg>${status}</arg>
+<arg>FAIL</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<status status="NOT RUN" endtime="20220316 23:15:46.957" starttime="20220316 23:15:46.957"/>
+</kw>
+<status status="FAIL" endtime="20220316 23:15:46.958" starttime="20220316 23:15:46.949"/>
+</kw>
+<tag>etetests</tag>
+<tag>xapptests</tag>
+<status status="FAIL" endtime="20220316 23:15:46.959" starttime="20220316 23:15:46.948">No keyword with name 'Generate UUID' found.</status>
+</test>
+<test id="s1-t8" name="Setup RAN Via E2Mgr X2">
+<kw name="Run E2Mgr Setup NodeB X2" library="e2mgr_interface">
+<arg>${TEST_NODE_B_NAME}</arg>
+<arg>${TEST_NODE_B_IP}</arg>
+<arg>${TEST_NODE_B_PORT}</arg>
+<doc>Setup X2 NodeB via E2 Manager</doc>
+<kw name="Set Variable" library="BuiltIn">
+<var>${data_path}</var>
+<arg>${E2MGR_BASE_PATH}/x2-setup</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20220316 23:15:46.961" level="INFO">${data_path} = v1/nodeb/x2-setup</msg>
+<status status="PASS" endtime="20220316 23:15:46.961" starttime="20220316 23:15:46.961"/>
+</kw>
+<kw name="Create Dictionary" library="BuiltIn">
+<var>${dict}</var>
+<arg>ran_name=${ran_name}</arg>
+<arg>ran_ip=${ran_ip}</arg>
+<arg>ran_port=${ran_port}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<msg timestamp="20220316 23:15:46.962" level="INFO">${dict} = {u'ran_name': u'AAAA456789', u'ran_ip': u'10.0.0.3', u'ran_port': u'36421'}</msg>
+<status status="PASS" endtime="20220316 23:15:46.962" starttime="20220316 23:15:46.961"/>
+</kw>
+<kw name="Fill JSON Template File" library="json_templater">
+<var>${data}</var>
+<arg>${E2MGR_SETUP_NODEB_TEMPLATE}</arg>
+<arg>${dict}</arg>
+<doc>Runs substitution on template to return a filled in json</doc>
+<kw name="Get File" library="OperatingSystem">
+<var>${json}</var>
+<arg>${json_file}</arg>
+<doc>Returns the contents of a specified file.</doc>
+<msg timestamp="20220316 23:15:46.963" html="true" level="INFO">Getting file '&lt;a href="file:///root/test/ric_robot_suite/robot/testsuites/robot/assets/templates/e2mgr_setup_nodeb.template"&gt;/root/test/ric_robot_suite/robot/testsuites/robot/assets/templates/e2mgr_setup_nodeb.template&lt;/a&gt;'.</msg>
+<msg timestamp="20220316 23:15:46.963" level="FAIL">IOError: [Errno 2] No such file or directory: '/root/test/ric_robot_suite/robot/testsuites/robot/assets/templates/e2mgr_setup_nodeb.template'</msg>
+<status status="FAIL" endtime="20220316 23:15:46.963" starttime="20220316 23:15:46.962"/>
+</kw>
+<kw name="Fill JSON Template" library="json_templater">
+<var>${returned_json}</var>
+<arg>${json}</arg>
+<arg>${arguments}</arg>
+<doc>Runs substitution on template to return a filled in json</doc>
+<status status="NOT RUN" endtime="20220316 23:15:46.964" starttime="20220316 23:15:46.964"/>
+</kw>
+<status status="FAIL" endtime="20220316 23:15:46.965" starttime="20220316 23:15:46.962"/>
+</kw>
+<kw name="Run E2Mgr POST Request" library="e2mgr_interface">
+<var>${resp}</var>
+<arg>${data_path}</arg>
+<arg>${data}</arg>
+<doc>Send an HTTP POST to the E2 Manager</doc>
+<status status="NOT RUN" endtime="20220316 23:15:46.965" starttime="20220316 23:15:46.965"/>
+</kw>
+<status status="FAIL" endtime="20220316 23:15:46.966" starttime="20220316 23:15:46.960"/>
+</kw>
+<kw name="Wait Until Keyword Succeeds" library="BuiltIn">
+<arg>20s</arg>
+<arg>5s</arg>
+<arg>Check NodeB Status</arg>
+<arg>${TEST_NODE_B_NAME}</arg>
+<doc>Runs the specified keyword and retries if it fails.</doc>
+<status status="NOT RUN" endtime="20220316 23:15:46.966" starttime="20220316 23:15:46.966"/>
+</kw>
+<tag>x2setup</tag>
+<status status="FAIL" endtime="20220316 23:15:46.967" starttime="20220316 23:15:46.959">IOError: [Errno 2] No such file or directory: '/root/test/ric_robot_suite/robot/testsuites/robot/assets/templates/e2mgr_setup_nodeb.template'</status>
+</test>
+<test id="s1-t9" name="Setup RAN Via E2Mgr Endc">
+<kw name="Run E2Mgr Setup NodeB Endc" library="e2mgr_interface">
+<arg>${TEST_NODE_B_NAME}</arg>
+<arg>${TEST_NODE_B_IP}</arg>
+<arg>${TEST_NODE_B_PORT}</arg>
+<doc>Setup Endc NodeB via E2 Manager</doc>
+<kw name="Set Variable" library="BuiltIn">
+<var>${data_path}</var>
+<arg>${E2MGR_BASE_PATH}/endc-setup</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20220316 23:15:46.968" level="INFO">${data_path} = v1/nodeb/endc-setup</msg>
+<status status="PASS" endtime="20220316 23:15:46.968" starttime="20220316 23:15:46.968"/>
+</kw>
+<kw name="Create Dictionary" library="BuiltIn">
+<var>${dict}</var>
+<arg>ran_name=${ran_name}</arg>
+<arg>ran_ip=${ran_ip}</arg>
+<arg>ran_port=${ran_port}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<msg timestamp="20220316 23:15:46.969" level="INFO">${dict} = {u'ran_name': u'AAAA456789', u'ran_ip': u'10.0.0.3', u'ran_port': u'36421'}</msg>
+<status status="PASS" endtime="20220316 23:15:46.969" starttime="20220316 23:15:46.969"/>
+</kw>
+<kw name="Fill JSON Template File" library="json_templater">
+<var>${data}</var>
+<arg>${E2MGR_SETUP_NODEB_TEMPLATE}</arg>
+<arg>${dict}</arg>
+<doc>Runs substitution on template to return a filled in json</doc>
+<kw name="Get File" library="OperatingSystem">
+<var>${json}</var>
+<arg>${json_file}</arg>
+<doc>Returns the contents of a specified file.</doc>
+<msg timestamp="20220316 23:15:46.970" html="true" level="INFO">Getting file '&lt;a href="file:///root/test/ric_robot_suite/robot/testsuites/robot/assets/templates/e2mgr_setup_nodeb.template"&gt;/root/test/ric_robot_suite/robot/testsuites/robot/assets/templates/e2mgr_setup_nodeb.template&lt;/a&gt;'.</msg>
+<msg timestamp="20220316 23:15:46.971" level="FAIL">IOError: [Errno 2] No such file or directory: '/root/test/ric_robot_suite/robot/testsuites/robot/assets/templates/e2mgr_setup_nodeb.template'</msg>
+<status status="FAIL" endtime="20220316 23:15:46.971" starttime="20220316 23:15:46.970"/>
+</kw>
+<kw name="Fill JSON Template" library="json_templater">
+<var>${returned_json}</var>
+<arg>${json}</arg>
+<arg>${arguments}</arg>
+<doc>Runs substitution on template to return a filled in json</doc>
+<status status="NOT RUN" endtime="20220316 23:15:46.972" starttime="20220316 23:15:46.972"/>
+</kw>
+<status status="FAIL" endtime="20220316 23:15:46.973" starttime="20220316 23:15:46.969"/>
+</kw>
+<kw name="Run E2Mgr POST Request" library="e2mgr_interface">
+<var>${resp}</var>
+<arg>${data_path}</arg>
+<arg>${data}</arg>
+<doc>Send an HTTP POST to the E2 Manager</doc>
+<status status="NOT RUN" endtime="20220316 23:15:46.973" starttime="20220316 23:15:46.973"/>
+</kw>
+<status status="FAIL" endtime="20220316 23:15:46.974" starttime="20220316 23:15:46.967"/>
+</kw>
+<kw name="Wait Until Keyword Succeeds" library="BuiltIn">
+<arg>20s</arg>
+<arg>5s</arg>
+<arg>Check NodeB Status</arg>
+<arg>${TEST_NODE_B_NAME}</arg>
+<doc>Runs the specified keyword and retries if it fails.</doc>
+<status status="NOT RUN" endtime="20220316 23:15:46.974" starttime="20220316 23:15:46.974"/>
+</kw>
+<tag>e2setup</tag>
+<status status="FAIL" endtime="20220316 23:15:46.974" starttime="20220316 23:15:46.967">IOError: [Errno 2] No such file or directory: '/root/test/ric_robot_suite/robot/testsuites/robot/assets/templates/e2mgr_setup_nodeb.template'</status>
+</test>
+<test id="s1-t10" name="Get NodeB via E2Mgr">
+<kw name="Run E2Mgr Get NodeB Request" library="e2mgr_interface">
+<arg>${TEST_NODE_B_NAME}</arg>
+<doc>Runs E2Mgr Get NodeB Request</doc>
+<kw name="Set Variable" library="BuiltIn">
+<var>${data_path}</var>
+<arg>${E2MGR_BASE_PATH}/${ran_name}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20220316 23:15:46.976" level="INFO">${data_path} = v1/nodeb/AAAA456789</msg>
+<status status="PASS" endtime="20220316 23:15:46.976" starttime="20220316 23:15:46.976"/>
+</kw>
+<kw name="Run E2Mgr GET Request" library="e2mgr_interface">
+<var>${resp}</var>
+<arg>${data_path}</arg>
+<doc>Runs E2Mgr GET Request</doc>
+<kw name="Create List" library="BuiltIn">
+<var>${auth}</var>
+<arg>${GLOBAL_INJECTED_E2MGR_USER}</arg>
+<arg>${GLOBAL_INJECTED_E2MGR_PASSWORD}</arg>
+<doc>Returns a list containing given items.</doc>
+<msg timestamp="20220316 23:15:46.979" level="FAIL">Variable '${GLOBAL_INJECTED_E2MGR_USER}' not found.</msg>
+<status status="FAIL" endtime="20220316 23:15:46.979" starttime="20220316 23:15:46.977"/>
+</kw>
+<kw name="Create Session">
+<var>${session} =</var>
+<arg>e2mgr</arg>
+<arg>${E2MGR_ENDPOINT}</arg>
+<arg>auth=${auth}</arg>
+<status status="NOT RUN" endtime="20220316 23:15:46.984" starttime="20220316 23:15:46.984"/>
+</kw>
+<kw name="Generate UUID">
+<var>${uuid} =</var>
+<status status="NOT RUN" endtime="20220316 23:15:46.988" starttime="20220316 23:15:46.988"/>
+</kw>
+<kw name="Create Dictionary" library="BuiltIn">
+<var>${headers}</var>
+<arg>Accept=application/json</arg>
+<arg>Content-Type=application/json</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="NOT RUN" endtime="20220316 23:15:46.988" starttime="20220316 23:15:46.988"/>
+</kw>
+<kw name="Get Request">
+<var>${resp} =</var>
+<arg>e2mgr</arg>
+<arg>${data_path}</arg>
+<arg>headers=${headers}</arg>
+<status status="NOT RUN" endtime="20220316 23:15:46.992" starttime="20220316 23:15:46.992"/>
+</kw>
+<kw name="Log" library="BuiltIn">
+<arg>Received response from E2Mgr ${resp.text}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" endtime="20220316 23:15:46.993" starttime="20220316 23:15:46.993"/>
+</kw>
+<kw name="Should Be True" library="BuiltIn">
+<arg>${resp}</arg>
+<doc>Fails if the given condition is not true.</doc>
+<status status="NOT RUN" endtime="20220316 23:15:46.993" starttime="20220316 23:15:46.993"/>
+</kw>
+<status status="FAIL" endtime="20220316 23:15:46.994" starttime="20220316 23:15:46.976"/>
+</kw>
+<kw name="Should Be Equal As Strings" library="BuiltIn">
+<arg>${resp.json()['ranName']}</arg>
+<arg>${ran_name}</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<status status="NOT RUN" endtime="20220316 23:15:46.995" starttime="20220316 23:15:46.995"/>
+</kw>
+<status status="FAIL" endtime="20220316 23:15:46.996" starttime="20220316 23:15:46.975"/>
+</kw>
+<tag>e2setup</tag>
+<tag>x2setup</tag>
+<status status="FAIL" endtime="20220316 23:15:46.996" starttime="20220316 23:15:46.975">Variable '${GLOBAL_INJECTED_E2MGR_USER}' not found.</status>
+</test>
+<test id="s1-t11" name="Get All NodeBs Via E2Mgr">
+<kw name="Run E2Mgr Get All NodeBs Request" library="e2mgr_interface">
+<doc>Runs E2Mgr Get All NodeBs Request</doc>
+<kw name="Set Variable" library="BuiltIn">
+<var>${data_path}</var>
+<arg>${E2MGR_BASE_PATH}/ids</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20220316 23:15:46.998" level="INFO">${data_path} = v1/nodeb/ids</msg>
+<status status="PASS" endtime="20220316 23:15:46.998" starttime="20220316 23:15:46.998"/>
+</kw>
+<kw name="Run E2Mgr GET Request" library="e2mgr_interface">
+<var>${resp}</var>
+<arg>${data_path}</arg>
+<doc>Runs E2Mgr GET Request</doc>
+<kw name="Create List" library="BuiltIn">
+<var>${auth}</var>
+<arg>${GLOBAL_INJECTED_E2MGR_USER}</arg>
+<arg>${GLOBAL_INJECTED_E2MGR_PASSWORD}</arg>
+<doc>Returns a list containing given items.</doc>
+<msg timestamp="20220316 23:15:47.001" level="FAIL">Variable '${GLOBAL_INJECTED_E2MGR_USER}' not found.</msg>
+<status status="FAIL" endtime="20220316 23:15:47.001" starttime="20220316 23:15:46.999"/>
+</kw>
+<kw name="Create Session">
+<var>${session} =</var>
+<arg>e2mgr</arg>
+<arg>${E2MGR_ENDPOINT}</arg>
+<arg>auth=${auth}</arg>
+<status status="NOT RUN" endtime="20220316 23:15:47.007" starttime="20220316 23:15:47.007"/>
+</kw>
+<kw name="Generate UUID">
+<var>${uuid} =</var>
+<status status="NOT RUN" endtime="20220316 23:15:47.012" starttime="20220316 23:15:47.012"/>
+</kw>
+<kw name="Create Dictionary" library="BuiltIn">
+<var>${headers}</var>
+<arg>Accept=application/json</arg>
+<arg>Content-Type=application/json</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="NOT RUN" endtime="20220316 23:15:47.012" starttime="20220316 23:15:47.012"/>
+</kw>
+<kw name="Get Request">
+<var>${resp} =</var>
+<arg>e2mgr</arg>
+<arg>${data_path}</arg>
+<arg>headers=${headers}</arg>
+<status status="NOT RUN" endtime="20220316 23:15:47.017" starttime="20220316 23:15:47.017"/>
+</kw>
+<kw name="Log" library="BuiltIn">
+<arg>Received response from E2Mgr ${resp.text}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" endtime="20220316 23:15:47.017" starttime="20220316 23:15:47.017"/>
+</kw>
+<kw name="Should Be True" library="BuiltIn">
+<arg>${resp}</arg>
+<doc>Fails if the given condition is not true.</doc>
+<status status="NOT RUN" endtime="20220316 23:15:47.017" starttime="20220316 23:15:47.017"/>
+</kw>
+<status status="FAIL" endtime="20220316 23:15:47.018" starttime="20220316 23:15:46.998"/>
+</kw>
+<status status="FAIL" endtime="20220316 23:15:47.019" starttime="20220316 23:15:46.997"/>
+</kw>
+<tag>ci_tests</tag>
+<tag>e2mgrtest</tag>
+<tag>e2setup</tag>
+<tag>etetests</tag>
+<tag>x2setup</tag>
+<status status="FAIL" endtime="20220316 23:15:47.020" starttime="20220316 23:15:46.997">Variable '${GLOBAL_INJECTED_E2MGR_USER}' not found.</status>
+</test>
+<test id="s1-t12" name="Setup RAN Via Dashboard Endc">
+<kw name="Run Dashboard Setup NodeB Endc" library="dashboard_interface">
+<arg>${TEST_NODE_B_NAME}</arg>
+<arg>${TEST_NODE_B_IP}</arg>
+<arg>${TEST_NODE_B_PORT}</arg>
+<doc>Setup Endc NodeB via E2 Manager</doc>
+<kw name="Set Variable" library="BuiltIn">
+<var>${data_path}</var>
+<arg>${DASH_E2MGR_BASE_PATH}/endc-setup</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20220316 23:15:47.022" level="INFO">${data_path} = /e2mgr/v1/nodeb/endc-setup</msg>
+<status status="PASS" endtime="20220316 23:15:47.022" starttime="20220316 23:15:47.021"/>
+</kw>
+<kw name="Create Dictionary" library="BuiltIn">
+<var>${dict}</var>
+<arg>ran_name=${ran_name}</arg>
+<arg>ran_ip=${ran_ip}</arg>
+<arg>ran_port=${ran_port}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<msg timestamp="20220316 23:15:47.023" level="INFO">${dict} = {u'ran_name': u'AAAA456789', u'ran_ip': u'10.0.0.3', u'ran_port': u'36421'}</msg>
+<status status="PASS" endtime="20220316 23:15:47.023" starttime="20220316 23:15:47.022"/>
+</kw>
+<kw name="Fill JSON Template File" library="json_templater">
+<var>${data}</var>
+<arg>${E2MGR_SETUP_NODEB_TEMPLATE}</arg>
+<arg>${dict}</arg>
+<doc>Runs substitution on template to return a filled in json</doc>
+<kw name="Get File" library="OperatingSystem">
+<var>${json}</var>
+<arg>${json_file}</arg>
+<doc>Returns the contents of a specified file.</doc>
+<msg timestamp="20220316 23:15:47.024" html="true" level="INFO">Getting file '&lt;a href="file:///root/test/ric_robot_suite/robot/testsuites/robot/assets/templates/e2mgr_setup_nodeb.template"&gt;/root/test/ric_robot_suite/robot/testsuites/robot/assets/templates/e2mgr_setup_nodeb.template&lt;/a&gt;'.</msg>
+<msg timestamp="20220316 23:15:47.024" level="FAIL">IOError: [Errno 2] No such file or directory: '/root/test/ric_robot_suite/robot/testsuites/robot/assets/templates/e2mgr_setup_nodeb.template'</msg>
+<status status="FAIL" endtime="20220316 23:15:47.024" starttime="20220316 23:15:47.023"/>
+</kw>
+<kw name="Fill JSON Template" library="json_templater">
+<var>${returned_json}</var>
+<arg>${json}</arg>
+<arg>${arguments}</arg>
+<doc>Runs substitution on template to return a filled in json</doc>
+<status status="NOT RUN" endtime="20220316 23:15:47.025" starttime="20220316 23:15:47.025"/>
+</kw>
+<status status="FAIL" endtime="20220316 23:15:47.026" starttime="20220316 23:15:47.023"/>
+</kw>
+<kw name="Create List" library="BuiltIn">
+<var>${auth}</var>
+<arg>${GLOBAL_INJECTED_DASH_USER}</arg>
+<arg>${GLOBAL_INJECTED_DASH_PASSWORD}</arg>
+<doc>Returns a list containing given items.</doc>
+<status status="NOT RUN" endtime="20220316 23:15:47.027" starttime="20220316 23:15:47.027"/>
+</kw>
+<kw name="Create Session">
+<var>${session}=</var>
+<arg>e2mgr</arg>
+<arg>${DASH_ENDPOINT}</arg>
+<arg>auth=${auth}</arg>
+<status status="NOT RUN" endtime="20220316 23:15:47.032" starttime="20220316 23:15:47.032"/>
+</kw>
+<kw name="Create Dictionary" library="BuiltIn">
+<var>${headers}</var>
+<arg>Accept=application/json</arg>
+<arg>Content-Type=application/json</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="NOT RUN" endtime="20220316 23:15:47.032" starttime="20220316 23:15:47.032"/>
+</kw>
+<kw name="Post Request">
+<var>${resp}=</var>
+<arg>e2mgr</arg>
+<arg>${data_path}</arg>
+<arg>data=${data}</arg>
+<arg>headers=${headers}</arg>
+<status status="NOT RUN" endtime="20220316 23:15:47.037" starttime="20220316 23:15:47.037"/>
+</kw>
+<kw name="Log" library="BuiltIn">
+<arg>Received response from Dashboard ${resp.text}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" endtime="20220316 23:15:47.038" starttime="20220316 23:15:47.037"/>
+</kw>
+<kw name="Should Be Equal As Strings" library="BuiltIn">
+<arg>${resp.status_code}</arg>
+<arg>200</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<status status="NOT RUN" endtime="20220316 23:15:47.038" starttime="20220316 23:15:47.038"/>
+</kw>
+<status status="FAIL" endtime="20220316 23:15:47.039" starttime="20220316 23:15:47.021"/>
+</kw>
+<kw name="Wait Until Keyword Succeeds" library="BuiltIn">
+<arg>20s</arg>
+<arg>5s</arg>
+<arg>Dashboard Check NodeB Status</arg>
+<arg>${TEST_NODE_B_NAME}</arg>
+<doc>Runs the specified keyword and retries if it fails.</doc>
+<status status="NOT RUN" endtime="20220316 23:15:47.039" starttime="20220316 23:15:47.039"/>
+</kw>
+<tag>e2setup_dash</tag>
+<status status="FAIL" endtime="20220316 23:15:47.039" starttime="20220316 23:15:47.020">IOError: [Errno 2] No such file or directory: '/root/test/ric_robot_suite/robot/testsuites/robot/assets/templates/e2mgr_setup_nodeb.template'</status>
+</test>
+<test id="s1-t13" name="Setup RAN Via Dashboard X2">
+<kw name="Run Dashboard Setup NodeB X2" library="dashboard_interface">
+<arg>${TEST_NODE_B_NAME}</arg>
+<arg>${TEST_NODE_B_IP}</arg>
+<arg>${TEST_NODE_B_PORT}</arg>
+<doc>Setup X2 NodeB via E2 Manager</doc>
+<kw name="Set Variable" library="BuiltIn">
+<var>${data_path}</var>
+<arg>${DASH_E2MGR_BASE_PATH}/x2-setup</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20220316 23:15:47.042" level="INFO">${data_path} = /e2mgr/v1/nodeb/x2-setup</msg>
+<status status="PASS" endtime="20220316 23:15:47.042" starttime="20220316 23:15:47.041"/>
+</kw>
+<kw name="Create Dictionary" library="BuiltIn">
+<var>${dict}</var>
+<arg>ran_name=${ran_name}</arg>
+<arg>ran_ip=${ran_ip}</arg>
+<arg>ran_port=${ran_port}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<msg timestamp="20220316 23:15:47.043" level="INFO">${dict} = {u'ran_name': u'AAAA456789', u'ran_ip': u'10.0.0.3', u'ran_port': u'36421'}</msg>
+<status status="PASS" endtime="20220316 23:15:47.043" starttime="20220316 23:15:47.042"/>
+</kw>
+<kw name="Fill JSON Template File" library="json_templater">
+<var>${data}</var>
+<arg>${E2MGR_SETUP_NODEB_TEMPLATE}</arg>
+<arg>${dict}</arg>
+<doc>Runs substitution on template to return a filled in json</doc>
+<kw name="Get File" library="OperatingSystem">
+<var>${json}</var>
+<arg>${json_file}</arg>
+<doc>Returns the contents of a specified file.</doc>
+<msg timestamp="20220316 23:15:47.044" html="true" level="INFO">Getting file '&lt;a href="file:///root/test/ric_robot_suite/robot/testsuites/robot/assets/templates/e2mgr_setup_nodeb.template"&gt;/root/test/ric_robot_suite/robot/testsuites/robot/assets/templates/e2mgr_setup_nodeb.template&lt;/a&gt;'.</msg>
+<msg timestamp="20220316 23:15:47.045" level="FAIL">IOError: [Errno 2] No such file or directory: '/root/test/ric_robot_suite/robot/testsuites/robot/assets/templates/e2mgr_setup_nodeb.template'</msg>
+<status status="FAIL" endtime="20220316 23:15:47.045" starttime="20220316 23:15:47.044"/>
+</kw>
+<kw name="Fill JSON Template" library="json_templater">
+<var>${returned_json}</var>
+<arg>${json}</arg>
+<arg>${arguments}</arg>
+<doc>Runs substitution on template to return a filled in json</doc>
+<status status="NOT RUN" endtime="20220316 23:15:47.046" starttime="20220316 23:15:47.046"/>
+</kw>
+<status status="FAIL" endtime="20220316 23:15:47.047" starttime="20220316 23:15:47.043"/>
+</kw>
+<kw name="Create List" library="BuiltIn">
+<var>${auth}</var>
+<arg>${GLOBAL_INJECTED_DASH_USER}</arg>
+<arg>${GLOBAL_INJECTED_DASH_PASSWORD}</arg>
+<doc>Returns a list containing given items.</doc>
+<status status="NOT RUN" endtime="20220316 23:15:47.047" starttime="20220316 23:15:47.047"/>
+</kw>
+<kw name="Create Session">
+<var>${session}=</var>
+<arg>e2mgr</arg>
+<arg>${DASH_ENDPOINT}</arg>
+<arg>auth=${auth}</arg>
+<status status="NOT RUN" endtime="20220316 23:15:47.052" starttime="20220316 23:15:47.052"/>
+</kw>
+<kw name="Create Dictionary" library="BuiltIn">
+<var>${headers}</var>
+<arg>Accept=application/json</arg>
+<arg>Content-Type=application/json</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="NOT RUN" endtime="20220316 23:15:47.052" starttime="20220316 23:15:47.052"/>
+</kw>
+<kw name="Post Request">
+<var>${resp}=</var>
+<arg>e2mgr</arg>
+<arg>${data_path}</arg>
+<arg>data=${data}</arg>
+<arg>headers=${headers}</arg>
+<status status="NOT RUN" endtime="20220316 23:15:47.056" starttime="20220316 23:15:47.056"/>
+</kw>
+<kw name="Log" library="BuiltIn">
+<arg>Received response from Dashboard ${resp.text}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" endtime="20220316 23:15:47.056" starttime="20220316 23:15:47.056"/>
+</kw>
+<kw name="Should Be Equal As Strings" library="BuiltIn">
+<arg>${resp.status_code}</arg>
+<arg>200</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<status status="NOT RUN" endtime="20220316 23:15:47.057" starttime="20220316 23:15:47.056"/>
+</kw>
+<status status="FAIL" endtime="20220316 23:15:47.057" starttime="20220316 23:15:47.040"/>
+</kw>
+<kw name="Wait Until Keyword Succeeds" library="BuiltIn">
+<arg>20s</arg>
+<arg>5s</arg>
+<arg>Dashboard Check NodeB Status</arg>
+<arg>${TEST_NODE_B_NAME}</arg>
+<doc>Runs the specified keyword and retries if it fails.</doc>
+<status status="NOT RUN" endtime="20220316 23:15:47.058" starttime="20220316 23:15:47.058"/>
+</kw>
+<tag>x2setup_dash</tag>
+<status status="FAIL" endtime="20220316 23:15:47.058" starttime="20220316 23:15:47.040">IOError: [Errno 2] No such file or directory: '/root/test/ric_robot_suite/robot/testsuites/robot/assets/templates/e2mgr_setup_nodeb.template'</status>
+</test>
+<test id="s1-t14" name="Get NodeB via Dashboard">
+<kw name="Run Dashboard Get NodeB Request" library="dashboard_interface">
+<arg>${TEST_NODE_B_NAME}</arg>
+<doc>Runs Dashboard Get NodeB Request</doc>
+<kw name="Set Variable" library="BuiltIn">
+<var>${data_path}</var>
+<arg>${DASH_E2MGR_BASE_PATH}/${ran_name}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20220316 23:15:47.060" level="INFO">${data_path} = /e2mgr/v1/nodeb/AAAA456789</msg>
+<status status="PASS" endtime="20220316 23:15:47.060" starttime="20220316 23:15:47.060"/>
+</kw>
+<kw name="Run Keyword" library="BuiltIn">
+<var>${resp}</var>
+<arg>Run Dashboard Get Request</arg>
+<arg>${data_path}</arg>
+<doc>Executes the given keyword with the given arguments.</doc>
+<kw name="Run Dashboard Get Request" library="dashboard_interface">
+<arg>${data_path}</arg>
+<doc>Runs Dashboard Get Request</doc>
+<kw name="Create List" library="BuiltIn">
+<var>${auth}</var>
+<arg>${GLOBAL_INJECTED_DASH_USER}</arg>
+<arg>${GLOBAL_INJECTED_DASH_PASSWORD}</arg>
+<doc>Returns a list containing given items.</doc>
+<msg timestamp="20220316 23:15:47.064" level="FAIL">Variable '${GLOBAL_INJECTED_DASH_USER}' not found.</msg>
+<status status="FAIL" endtime="20220316 23:15:47.064" starttime="20220316 23:15:47.061"/>
+</kw>
+<kw name="Create Session">
+<var>${session}=</var>
+<arg>e2mgr</arg>
+<arg>${DASH_ENDPOINT}</arg>
+<arg>auth=${auth}</arg>
+<status status="NOT RUN" endtime="20220316 23:15:47.069" starttime="20220316 23:15:47.069"/>
+</kw>
+<kw name="Generate UUID">
+<var>${uuid}=</var>
+<status status="NOT RUN" endtime="20220316 23:15:47.074" starttime="20220316 23:15:47.074"/>
+</kw>
+<kw name="Create Dictionary" library="BuiltIn">
+<var>${headers}</var>
+<arg>Accept=application/json</arg>
+<arg>Content-Type=application/json</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="NOT RUN" endtime="20220316 23:15:47.074" starttime="20220316 23:15:47.074"/>
+</kw>
+<kw name="Get Request">
+<var>${resp}=</var>
+<arg>e2mgr</arg>
+<arg>${data_path}</arg>
+<arg>headers=${headers}</arg>
+<status status="NOT RUN" endtime="20220316 23:15:47.079" starttime="20220316 23:15:47.079"/>
+</kw>
+<kw name="Log" library="BuiltIn">
+<arg>Received response from Dashboard ${resp.text}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" endtime="20220316 23:15:47.080" starttime="20220316 23:15:47.080"/>
+</kw>
+<kw name="Should Be Equal As Strings" library="BuiltIn">
+<arg>${resp.status_code}</arg>
+<arg>200</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<status status="NOT RUN" endtime="20220316 23:15:47.080" starttime="20220316 23:15:47.080"/>
+</kw>
+<status status="FAIL" endtime="20220316 23:15:47.081" starttime="20220316 23:15:47.061"/>
+</kw>
+<status status="FAIL" endtime="20220316 23:15:47.081" starttime="20220316 23:15:47.061"/>
+</kw>
+<kw name="Should Be Equal As Strings" library="BuiltIn">
+<arg>${resp.status_code}</arg>
+<arg>200</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<status status="NOT RUN" endtime="20220316 23:15:47.082" starttime="20220316 23:15:47.082"/>
+</kw>
+<status status="FAIL" endtime="20220316 23:15:47.082" starttime="20220316 23:15:47.059"/>
+</kw>
+<tag>e2setup_dash</tag>
+<tag>x2setup_dash</tag>
+<status status="FAIL" endtime="20220316 23:15:47.083" starttime="20220316 23:15:47.059">Variable '${GLOBAL_INJECTED_DASH_USER}' not found.</status>
+</test>
+<test id="s1-t15" name="Get All NodeBs via Dashboard">
+<kw name="Run Dashboard Get All NodeBs Request" library="dashboard_interface">
+<doc>Runs Dashboard Get All NodeBs Request</doc>
+<kw name="Set Variable" library="BuiltIn">
+<var>${data_path}</var>
+<arg>${DASH_E2MGR_BASE_VERSION}/nodeb-ids</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20220316 23:15:47.085" level="INFO">${data_path} = /e2mgr/v1/nodeb-ids</msg>
+<status status="PASS" endtime="20220316 23:15:47.085" starttime="20220316 23:15:47.084"/>
+</kw>
+<kw name="Run Keyword" library="BuiltIn">
+<var>${resp}</var>
+<arg>Run Dashboard Get Request</arg>
+<arg>${data_path}</arg>
+<doc>Executes the given keyword with the given arguments.</doc>
+<kw name="Run Dashboard Get Request" library="dashboard_interface">
+<arg>${data_path}</arg>
+<doc>Runs Dashboard Get Request</doc>
+<kw name="Create List" library="BuiltIn">
+<var>${auth}</var>
+<arg>${GLOBAL_INJECTED_DASH_USER}</arg>
+<arg>${GLOBAL_INJECTED_DASH_PASSWORD}</arg>
+<doc>Returns a list containing given items.</doc>
+<msg timestamp="20220316 23:15:47.088" level="FAIL">Variable '${GLOBAL_INJECTED_DASH_USER}' not found.</msg>
+<status status="FAIL" endtime="20220316 23:15:47.088" starttime="20220316 23:15:47.086"/>
+</kw>
+<kw name="Create Session">
+<var>${session}=</var>
+<arg>e2mgr</arg>
+<arg>${DASH_ENDPOINT}</arg>
+<arg>auth=${auth}</arg>
+<status status="NOT RUN" endtime="20220316 23:15:47.093" starttime="20220316 23:15:47.093"/>
+</kw>
+<kw name="Generate UUID">
+<var>${uuid}=</var>
+<status status="NOT RUN" endtime="20220316 23:15:47.098" starttime="20220316 23:15:47.098"/>
+</kw>
+<kw name="Create Dictionary" library="BuiltIn">
+<var>${headers}</var>
+<arg>Accept=application/json</arg>
+<arg>Content-Type=application/json</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="NOT RUN" endtime="20220316 23:15:47.098" starttime="20220316 23:15:47.098"/>
+</kw>
+<kw name="Get Request">
+<var>${resp}=</var>
+<arg>e2mgr</arg>
+<arg>${data_path}</arg>
+<arg>headers=${headers}</arg>
+<status status="NOT RUN" endtime="20220316 23:15:47.103" starttime="20220316 23:15:47.103"/>
+</kw>
+<kw name="Log" library="BuiltIn">
+<arg>Received response from Dashboard ${resp.text}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" endtime="20220316 23:15:47.103" starttime="20220316 23:15:47.103"/>
+</kw>
+<kw name="Should Be Equal As Strings" library="BuiltIn">
+<arg>${resp.status_code}</arg>
+<arg>200</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<status status="NOT RUN" endtime="20220316 23:15:47.104" starttime="20220316 23:15:47.103"/>
+</kw>
+<status status="FAIL" endtime="20220316 23:15:47.105" starttime="20220316 23:15:47.085"/>
+</kw>
+<status status="FAIL" endtime="20220316 23:15:47.105" starttime="20220316 23:15:47.085"/>
+</kw>
+<status status="FAIL" endtime="20220316 23:15:47.106" starttime="20220316 23:15:47.084"/>
+</kw>
+<tag>ci_tests</tag>
+<tag>e2setup_dash</tag>
+<tag>x2setup_dash</tag>
+<status status="FAIL" endtime="20220316 23:15:47.107" starttime="20220316 23:15:47.083">Variable '${GLOBAL_INJECTED_DASH_USER}' not found.</status>
+</test>
+<doc>Executes the End To End Test cases
+</doc>
+<status status="FAIL" endtime="20220316 23:15:47.108" starttime="20220316 23:15:46.731"/>
+</suite>
+<statistics>
+<total>
+<stat fail="15" skip="0" pass="0">All Tests</stat>
+</total>
+<tag>
+<stat fail="2" skip="0" pass="0">ci_tests</stat>
+<stat fail="1" skip="0" pass="0">e2mgrtest</stat>
+<stat fail="3" skip="0" pass="0">e2setup</stat>
+<stat fail="3" skip="0" pass="0">e2setup_dash</stat>
+<stat fail="8" skip="0" pass="0">etetests</stat>
+<stat fail="3" skip="0" pass="0">x2setup</stat>
+<stat fail="3" skip="0" pass="0">x2setup_dash</stat>
+<stat fail="7" skip="0" pass="0">xapptests</stat>
+</tag>
+<suite>
+<stat fail="15" skip="0" id="s1" name="Ete" pass="0">Ete</stat>
+</suite>
+</statistics>
+<errors>
+<msg timestamp="20220316 23:15:46.783" level="ERROR">Error in file '/root/test/ric_robot_suite/robot/resources/appmgr/appmgr_interface.robot' on line 4: Importing library 'RequestsLibrary' failed: ImportError: No module named RequestsLibrary
+Traceback (most recent call last):
+  None
+PYTHONPATH:
+  /usr/local/bin
+  /usr/lib/python2.7
+  /usr/lib/python2.7/plat-x86_64-linux-gnu
+  /usr/lib/python2.7/lib-tk
+  /usr/lib/python2.7/lib-old
+  /usr/lib/python2.7/lib-dynload
+  /usr/local/lib/python2.7/dist-packages
+  /usr/lib/python2.7/dist-packages</msg>
+<msg timestamp="20220316 23:15:46.799" level="ERROR">Error in file '/root/test/ric_robot_suite/robot/resources/appmgr/negative_appmgr_tests.robot' on line 5: Importing library 'UUID' failed: ImportError: No module named UUID
+Traceback (most recent call last):
+  None
+PYTHONPATH:
+  /usr/local/bin
+  /usr/lib/python2.7
+  /usr/lib/python2.7/plat-x86_64-linux-gnu
+  /usr/lib/python2.7/lib-tk
+  /usr/lib/python2.7/lib-old
+  /usr/lib/python2.7/lib-dynload
+  /usr/local/lib/python2.7/dist-packages
+  /usr/lib/python2.7/dist-packages</msg>
+<msg timestamp="20220316 23:15:46.812" level="ERROR">Error in file '/root/test/ric_robot_suite/robot/resources/e2mgr/e2mgr_interface.robot' on line 5: Importing library 'RequestsLibrary' failed: ImportError: No module named RequestsLibrary
+Traceback (most recent call last):
+  None
+PYTHONPATH:
+  /usr/local/bin
+  /usr/lib/python2.7
+  /usr/lib/python2.7/plat-x86_64-linux-gnu
+  /usr/lib/python2.7/lib-tk
+  /usr/lib/python2.7/lib-old
+  /usr/lib/python2.7/lib-dynload
+  /usr/local/lib/python2.7/dist-packages
+  /usr/lib/python2.7/dist-packages</msg>
+<msg timestamp="20220316 23:15:46.812" level="ERROR">Error in file '/root/test/ric_robot_suite/robot/resources/e2mgr/e2mgr_interface.robot' on line 6: Importing library 'UUID' failed: ImportError: No module named UUID
+Traceback (most recent call last):
+  None
+PYTHONPATH:
+  /usr/local/bin
+  /usr/lib/python2.7
+  /usr/lib/python2.7/plat-x86_64-linux-gnu
+  /usr/lib/python2.7/lib-tk
+  /usr/lib/python2.7/lib-old
+  /usr/lib/python2.7/lib-dynload
+  /usr/local/lib/python2.7/dist-packages
+  /usr/lib/python2.7/dist-packages</msg>
+<msg timestamp="20220316 23:15:46.815" level="ERROR">Error in file '/root/test/ric_robot_suite/robot/resources/json_templater.robot' on line 3: Importing library 'RequestsLibrary' failed: ImportError: No module named RequestsLibrary
+Traceback (most recent call last):
+  None
+PYTHONPATH:
+  /usr/local/bin
+  /usr/lib/python2.7
+  /usr/lib/python2.7/plat-x86_64-linux-gnu
+  /usr/lib/python2.7/lib-tk
+  /usr/lib/python2.7/lib-old
+  /usr/lib/python2.7/lib-dynload
+  /usr/local/lib/python2.7/dist-packages
+  /usr/lib/python2.7/dist-packages</msg>
+<msg timestamp="20220316 23:15:46.816" level="ERROR">Error in file '/root/test/ric_robot_suite/robot/resources/json_templater.robot' on line 4: Importing library 'StringTemplater' failed: ImportError: No module named StringTemplater
+Traceback (most recent call last):
+  None
+PYTHONPATH:
+  /usr/local/bin
+  /usr/lib/python2.7
+  /usr/lib/python2.7/plat-x86_64-linux-gnu
+  /usr/lib/python2.7/lib-tk
+  /usr/lib/python2.7/lib-old
+  /usr/lib/python2.7/lib-dynload
+  /usr/local/lib/python2.7/dist-packages
+  /usr/lib/python2.7/dist-packages</msg>
+<msg timestamp="20220316 23:15:46.828" level="ERROR">Error in file '/root/test/ric_robot_suite/robot/resources/dashboard/dashboard_interface.robot' on line 3: Importing library 'RequestsLibrary' failed: ImportError: No module named RequestsLibrary
+Traceback (most recent call last):
+  None
+PYTHONPATH:
+  /usr/local/bin
+  /usr/lib/python2.7
+  /usr/lib/python2.7/plat-x86_64-linux-gnu
+  /usr/lib/python2.7/lib-tk
+  /usr/lib/python2.7/lib-old
+  /usr/lib/python2.7/lib-dynload
+  /usr/local/lib/python2.7/dist-packages
+  /usr/lib/python2.7/dist-packages</msg>
+<msg timestamp="20220316 23:15:46.828" level="ERROR">Error in file '/root/test/ric_robot_suite/robot/resources/dashboard/dashboard_interface.robot' on line 4: Importing library 'UUID' failed: ImportError: No module named UUID
+Traceback (most recent call last):
+  None
+PYTHONPATH:
+  /usr/local/bin
+  /usr/lib/python2.7
+  /usr/lib/python2.7/plat-x86_64-linux-gnu
+  /usr/lib/python2.7/lib-tk
+  /usr/lib/python2.7/lib-old
+  /usr/lib/python2.7/lib-dynload
+  /usr/local/lib/python2.7/dist-packages
+  /usr/lib/python2.7/dist-packages</msg>
+<msg timestamp="20220316 23:15:46.831" level="ERROR">Error in file '/root/test/ric_robot_suite/robot/resources/appmgr/appmgr_interface.robot' on line 12: Setting variable '${APPMGR_ENDPOINT}' failed: Variable '${GLOBAL_APPMGR_SERVER_PROTOCOL}' not found.</msg>
+<msg timestamp="20220316 23:15:46.833" level="ERROR">Error in file '/root/test/ric_robot_suite/robot/resources/dashboard/dashboard_interface.robot' on line 12: Setting variable '${DASH_ENDPOINT}' failed: Variable '${GLOBAL_DASH_SERVER_PROTOCOL}' not found.</msg>
+<msg timestamp="20220316 23:15:46.835" level="ERROR">Error in file '/root/test/ric_robot_suite/robot/resources/e2mgr/e2mgr_interface.robot' on line 13: Setting variable '${E2MGR_ENDPOINT}' failed: Variable '${GLOBAL_E2MGR_SERVER_PROTOCOL}' not found.</msg>
+</errors>
+</robot>

@@ -1,0 +1,208 @@
+#   Copyright (c) 2019 AT&T Intellectual Property.
+#   Copyright (c) 2019 Nokia.
+#   Copyright (c) 2020 HCL Technologies Limited.
+#   Licensed under the Apache License, Version 2.0 (the "License");
+#   you may not use this file except in compliance with the License.
+#   You may obtain a copy of the License at
+#
+#       http://www.apache.org/licenses/LICENSE-2.0
+#
+#   Unless required by applicable law or agreed to in writing, software
+#   distributed under the License is distributed on an "AS IS" BASIS,
+#   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+#   See the License for the specific language governing permissions and
+#   limitations under the License.
+
+#
+# configuration for this chart is split between this file and the "recipe"
+# used by the ric-common chart.  For the most part, platform configuration
+# is defined by that recipe, and robot configuration is here.
+#
+
+images:
+ ric:
+  robot:
+   job:
+    init:
+     name: alpine
+     tag: latest
+    run:
+     repository: nexus3.o-ran-sc.org:10002
+     name: o-ran-sc/it-test-nanobot
+     tag: 0.0.8
+
+     # note: the helm chart does not create repository credential secrets.
+     # If your repository requires authentication, create a docker-registry
+     # secret with
+     #
+     #   kubectl create secret docker-registry --namespace <robot-job-namespace> ...
+     #
+     # and fill in secret-name below.  Only one secret should be created per
+     # registry. The chart will take care of producing a unique  list of
+     # imagePullSecrets.
+     repositoryCred: o-ran-registry-secret
+ric:
+ cluster:
+  # The kubernetes cluster name.  To find this, do:
+  # $ grep cluster: ${KUBECONFIG}
+  name: kubernetes
+  # the DNS domain for k8s services, typically "cluster.local"
+  domain: cluster.local
+ platform:
+  # RIC installation details.  These values mostly cover things
+  # the robot needs to know, but which aren't configured by the
+  # RIC recipe.
+  releaseName: r0
+  components:
+   a1mediator:
+    xappName: robot-xapp
+    policyID: "6266268"
+   appmgr:
+    user: test
+    password: test
+   dbaas:
+    controller:
+     type: statefulset
+     suffix: server
+     # the type of k8s controller for this entity
+     # (ie, statefulset, daemonset, deployment..)
+     # if unspecified, the default is "deployment".
+     #type: statefulset
+     # the suffix, if any, to append to the name
+     # of the controller entity.  The chart will
+     # prepend a hyphen to this string.
+     # suffix: server
+   e2mgr:
+    user: test
+    password: test
+   e2term:
+    controller:
+     suffix: alpha
+   rtmgr:
+    user: test
+    password: test
+   submgr:
+    user: test
+    password: test
+    port: 8080
+   o1mediator:
+    user: test
+    password: test
+    xapp:
+     name: robot-xapp
+     version: 1.0
+ xapp:
+  mcxapp:
+   listener:
+    containername: mc-xapp-listener
+   writer:
+    containername: mcxapp
+    # statistics sent to ves by the writer.  the tests
+    # will check that these are actually being sent
+    statistics:
+    - mc_connected_cnt
+    - throughput_gnb
+    - throughput_rollup
+    - throughput_ue
+ rbac:
+  # If true, create & use RBAC resources
+  #
+  create: true
+  clusterAdminRole: true
+  rules:
+    cluster:
+     - apiGroups:
+         - ""
+       resources:
+         - ["pods", "pods/log", "pods/exec", "services"]
+       verbs:
+         - get
+         - list
+         - watch
+         - patch
+         - update
+ robot:
+  release: r1
+  #
+  # If specified, a host filesystem
+  # path where robot output will be stored
+  log: /home/phuong/Documents/QP_xApp_Log
+  #
+  # Active testsuites can be chosen by
+  # tag, testuite names, or both.  leaving
+  # either unspecified will cause all to run.
+  # Kpimonxapp testsuite need to be uncomment before testing kpimonxapp
+  testsuites:
+#   - Subscription_Delete_xApp_Request
+#  - negative_scenarior_subsc_setup_timeout
+#  - negative_scenario_subscription_delete_procedure
+#  - submgr_negative_scenarios_e2_connection_break
+#  - e2e_kpimon_xapp
+#   - abnomal_usecase
+#   - QP_xApp
+   - health-check
+  tags:
+   enabled:
+   # - etetests
+   # - k8stests
+   disabled:
+   # - intrusive
+   # - artificialdata
+   - UpdateWebPage
+   - e2setup_dash
+   - x2setup_dash
+  #
+  job:
+   # set this to a true value to cause
+   # the job to fail (and, typically, be resubmitted)
+   # when tests fail
+   failOnTestFail: true
+   serviceAccount:
+    # by default, the job will create
+    # a temporary serviceaccount and
+    # role to allow it to access the
+    # xapp and platform namespaces.
+    # to use an existing serviceaccount,
+    # set this to false...
+    create: true
+    # ... and specify the serviceaccount here:
+    # name: nanobot
+  #
+  environment:
+    # the name of a test xapp; the appmgr testsuite
+    # will attempt to deploy and undeploy this app;
+    # This should be an xapp which is "onboarded" to
+    # the appmgr but not deployed at the time the test
+    # is initiated.
+    # Change the Xapp based on your requirement.
+    kpimon: xappkpimon
+    xapp: bouncer-xapp
+    gNodeB:
+     # the details of a test gNodeB, for [E/X]2 tests.
+     # This can be either a real gnodeb or a simulator,
+     # but in either case should exist prior to test
+     # initiation.
+     # added deployment name and deployment namespace,
+     # for Ran elements.
+     total_gNodeB: 1
+     total_gNodeB_e2sim_1: 1
+     total_gNodeB_e2sim_2: 1
+     name: gnb_130_440_b5c67788
+     address: 10.110.240.13
+     port: 38000
+     viavi_deployment: viavi
+     ran_deployment: e2sim
+     ran_deployment_1: e2sim1
+     ran_deployment_2: e2sim2
+     ran_namespace: test
+     cluster_ip: 192.168.56.200
+     username: phuong
+     password: phuong
+     plmnid: 310044 
+     gnbid: gnb_130_440_b5c67788 
+    dashboard:
+     address: 10.1.0.1
+     port: 31080
+    E2Term: 
+     address: 10.110.240.13
+

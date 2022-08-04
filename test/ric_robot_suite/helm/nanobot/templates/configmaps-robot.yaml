@@ -1,0 +1,14 @@
+{{- range $map := list "bin" "properties" "resources" "testsuites" }}
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: robot-{{ $map }}
+  namespace: {{ $.Release.Namespace }}
+data:
+{{- $path := printf "configmap-src/*/%s/*" $map }}
+{{- $content :=  $.Files.Glob  $path }}
+{{- if $content }}
+{{ tpl ($content).AsConfig $ | indent 2 }}
+{{- end }}
+{{- end }}

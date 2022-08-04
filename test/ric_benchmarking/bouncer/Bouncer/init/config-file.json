@@ -1,0 +1,52 @@
+ {
+        "xapp_name": "bouncer-xapp",
+        "version": "2.0.0",
+        "containers": [
+            {
+                "name": "bouncer-xapp",
+                "image": {
+		"registry": "nexus3.o-ran-sc.org:10002",
+		"name": "oran-ric/ric-app-bouncer",
+		"tag": "2.0.0"
+               	}
+            }
+        ],
+        "messaging": {
+            "ports": [
+                {
+                        "name": "http",
+                        "container": "bouncer-xapp",
+                        "port": 8080,
+                        "description": "http service"
+                },
+                {
+                    "name": "rmr-data",
+                    "container": "bouncer-xapp",
+                    "port": 4560,
+
+                    "rxMessages": ["RIC_SUB_RESP", "RIC_INDICATION","RIC_SUB_DEL_RESP","RIC_CONTROL_ACK"],
+                    "txMessages": ["RIC_SUB_REQ","RIC_SUB_DEL_REQ","RIC_CONTROL_REQ"],
+                    "policies": [1],
+                    "description": "rmr receive data port for Bouncer xApp"
+                },
+                {
+                    "name": "rmr-route",
+                    "container": "bouncer-xapp",
+                    "port": 4561,
+                    "description": "rmr route port for Bouncer xApp"
+                }
+            ]
+        },
+        "rmr": {
+            "protPort": "tcp:4560",
+            "maxSize": 2072,
+            "numWorkers": 1,
+            "txMessages": ["RIC_SUB_REQ","RIC_SUB_DEL_REQ","RIC_CONTROL_REQ"],
+            "rxMessages": ["RIC_SUB_RESP", "RIC_INDICATION","RIC_SUB_DEL_RESP","RIC_CONTROL_ACK"],
+            "policies": [1]
+        },
+        "http":{
+                "protPort": "tcp:8080"
+
+        }
+  }
